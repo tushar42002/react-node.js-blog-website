@@ -1,7 +1,10 @@
 import React, { useContext, useEffect } from 'react'
 import { DataContext } from '../../context/DataProvider';
+import { useNavigate } from 'react-router-dom'
 
 const ManageBlogs = () => {
+
+    const navigate = useNavigate();
 
 
     const context = useContext(DataContext);
@@ -11,6 +14,10 @@ const ManageBlogs = () => {
     useEffect(() => {
         getBlogs();
     }, [])
+
+    // const updateBlog = (id) => {
+    //     navigate(`/updateCategory/${id}`); 
+    // }
 
 
     return (
@@ -38,7 +45,7 @@ const ManageBlogs = () => {
                                 <tr key={item.id}>
                                     <td>{item.post_title}</td>
                                     <td>{item.category}</td>
-                                    <td><span onClick={() => editBlog(item.blog)} className="btn sm">Edit</span></td>
+                                    <td><span onClick={() =>  navigate(`/updatepost/${item.id}`)} className="btn sm">Edit</span></td>
                                     <td><span onClick={() => deleteBlog(item.id)} className="btn sm danger">Delete</span></td>
                                 </tr> 
                                 )

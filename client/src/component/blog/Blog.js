@@ -45,15 +45,15 @@ const Blog = () => {
                   <img src={`${imageUrl}/uploads/${item.post_image}`} alt="" />
                 </div>
                 <div className="post_info">
-                  <Link className="category_button">{item.category}</Link>
+                  <Link className="category_button">{item.title}</Link>
                   <h3 className="post_title"><Link to={`/singleblog/${item.id}`}>{item.post_title}</Link></h3>
                   <p className="post_body"> {contant.slice(0, 400)} </p>
                   <div className="post_author">
                     <div className="post_author-avatar">
-                      <img src={`${imageUrl}/uploads/${item.post_image}`} alt='' />
+                      <img src={`${imageUrl}/uploads/${item.avatar}`} alt='' />
                     </div>
                     <div className="post_author-info">
-                      {/* <h5>By: Tushar</h5> */}
+                      <h5>By: {item.email}</h5>
                       <small>{item.date.slice(0, 10)}</small>
                     </div>
                   </div>

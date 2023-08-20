@@ -18,8 +18,8 @@ import AddBlog from './component/dashboard/AddBlog';
 import AddCategory from './component/dashboard/AddCategory';
 import Blogs from './component/blog/Blogs';
 import Signup from './component/account/Signup';
-import Blog from './component/blog/Blog';
 import SingleBlog from './component/blog/SingleBlog';
+import EditBlog from './component/blog/EditBlog';
 
 
 function App() {
@@ -31,16 +31,21 @@ function App() {
         <div>
           <Routes>
            <Route path='/' element={<Home />}/>
+           
            <Route path='/login' element={<Login />}/>
            <Route path='/signup' element={<Signup />}/>
+
            <Route path='/blog' element={<Blogs />}/>
-           <Route path='/singleblog/:id' element={<Blog />}/>
-           <Route path='/singleblog' element={<SingleBlog />}/>
+           <Route path='/singleblog/:id' element={<SingleBlog />}/>
+
            <Route path='/about' element={<About />}/>
            <Route path='/service' element={<Service />}/>
            <Route path='/contact' element={<Contact />}/>
            <Route path='/dashboard' element={<Dashboard />}/>
+
            <Route path='/addBlog' element={<AddBlog />}/>
+           <Route path='/updatepost/:id' element={<EditBlog />}/>
+
            <Route path='/addCategory' element={<AddCategory />}/>
            <Route path='/updateCategory' element={<AddCategory />}/>
           </Routes>

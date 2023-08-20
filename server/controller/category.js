@@ -35,11 +35,16 @@ export const updateCategory = (req, res) =>{
 
     console.log(req.body);
 
-    let sql = `UPDATE categories SET title ='${title}', desc= '${desc}', user_email = '${email}' where id = ${id}`;
+    let { id, title, desc} = req.body;
+
+
+    let sql = `UPDATE categories SET title ='${title}', descripton= '${desc}' where id = '${id}'`;
 
     db.query(sql, function(err, result){
         if(err){
             res.status(500).json({ "error": "some error occured please try later" });
+        } else {
+            res.status(200).json({"success": "category updated"});
         }
     })
 }

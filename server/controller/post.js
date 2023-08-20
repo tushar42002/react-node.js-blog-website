@@ -2,11 +2,13 @@ import db from "../database/db.js";
 
 export const getPost = (req, res)=>{
     
-    let sql = `SELECT * FROM posts ORDER BY date DESC`;
+    // let sql = `SELECT * FROM posts ORDER BY date DESC`;
+    let sql  = 'SELECT posts.id, posts.post_title, posts.post_contant, posts.post_image, posts.date, categories.title, users.email, users.avatar FROM posts JOIN categories ON posts.category = categories.id JOIN users on posts.user_id = users.id'; 
     db.query(sql, function(err, result){
         if(err){
             res.status(500).json({ "error": "some error occured please try later" });
         }else{
+            console.log(result);
             res.json(result);
         }
     })
@@ -16,9 +18,10 @@ export const getPostWithId = (req, res)=>{
 
     const category = req.query.category;
     const id = req.params.id;
+    console.log(id);
 
     if(id){
-        var sql = `SELECT * FROM posts WHERE id = '${id}'  ORDER BY date DESC`;
+        var sql = `SELECT * FROM posts WHERE id = '${id}'`;
     }else if(category){
         var sql = `SELECT * FROM posts WHERE category = '${category}'  ORDER BY date DESC`;
     }
@@ -26,12 +29,13 @@ export const getPostWithId = (req, res)=>{
         if(err){
             res.status(500).json({ "error": "some error occured please try later" });
         }else{
+            console.log(result);
             res.json(result);
         }
     })
 }
 
-export const addPost = (req, res)=>{
+export const addPost = (req, res) => {
 
     const {heading, category, contant} = req.body;
     const userID = req.body.user_id;
@@ -52,7 +56,12 @@ export const addPost = (req, res)=>{
 
 export const updatePost = (req, res) =>{
 
-    let sql = `UPDATE posts SET post_title ='${title}', post_contant = '${contant}', post_image = '${thumbnail}', category = '${category}' where id = ${id}`;
+      const {id, heading, category, contant} = req.body;
+
+    console.log(req.body);
+    console.log(req.file);
+
+    let sql = `UPDATE posts SET post_title ='${heading}', post_contant = "${contant}", post_image = '${req.file.filename}', category = '${category}' where id = ${id}`;
 
     db.query(sql, function(err, result){
         if(err){

@@ -27,7 +27,7 @@ const FeatureBlog = () => {
                                 <img src={`${imageUrl}/uploads/${blogs[0].post_image}`} alt='' />
                             </div>
                             <div className="post_info">
-                                <a href="category-posts.php" className="category_button">{blogs[0].category}</a>
+                                <a href="category-posts.php" className="category_button">{blogs[0].title}</a>
                                 <h2 className="post_title"><Link href={`/singleblog/${blogs[0].id}`}>{blogs[0].post_title}</Link>
                                 </h2>
                                 <p className="post_body">{blogs[0].post_contant.slice(0, 400)}</p>

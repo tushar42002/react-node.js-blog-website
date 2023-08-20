@@ -35,7 +35,12 @@ const DataProvider = ({ children }) => {
             headers: new Headers({ 'content-Type': 'application/json' })
         })
         const json = await response.json();
+
+        console.log(json, 'dataprovider');
+
         setBlogs2(json)
+
+        
     }
 
     const getCategory = async () => {
@@ -188,10 +193,18 @@ const DataProvider = ({ children }) => {
 
     const editBlog = async (data) => {
 
+        const file = new FormData();
+
+        file.append('heading', data.heading);
+        file.append('category', data.category);
+        file.append('contant', data.contant);
+        file.append('image', data.image);
+        file.append('user_id', '0');
+        console.log(file);
+
         const response = await fetch(`${url}/updatepost`, {
             method: 'POST',
-            headers: new Headers({ 'content-Type': 'multipart/form-data' }),
-            body: data
+            body: file
         })
         const json = await response.json();
 
@@ -216,7 +229,6 @@ const DataProvider = ({ children }) => {
 
         } else{
             navigate('/dashboard', { replace: true });
-            
         }
        
     }

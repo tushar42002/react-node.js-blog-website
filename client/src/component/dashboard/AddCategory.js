@@ -1,26 +1,27 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { DataContext } from '../../context/DataProvider';
 import { useLocation } from 'react-router-dom';
+
+
+
+
 
 const AddCategory = () => {
 
     const location = useLocation();
 
-    let UpCategoryData = null;
+    let initialCategory = JSON.parse(sessionStorage.getItem('category'));
+
 
     const context = useContext(DataContext);
 
     const { addCategory, editCategory } = context;
 
-    const [categoryData, setCategoryData] = useState({})
 
-    if (location.pathname === '/updateCategory') {
-        UpCategoryData = JSON.parse(sessionStorage.getItem('category'));
-    }
 
-    if (UpCategoryData) {
-        setCategoryData(UpCategoryData);
-    }
+    const [categoryData, setCategoryData] = useState(initialCategory === null ? {} : initialCategory);
+
+
 
 
     const OnChange = (e) => {
@@ -32,19 +33,29 @@ const AddCategory = () => {
         addCategory(categoryData);
     }
 
+    const updateCategoryHandle = (e,data) => {
+
+        e.preventDefault();
+
+        editCategory(data);
+
+        sessionStorage.removeItem('category');
+
+    }
+
+
+
 
     return (
         <section className="form_section">
             <div className="container form_container">
                 <h2>Add Category</h2>
-                <div className="alert_message success">
-                    <p>category added</p>
-                </div>
+                
                 <div className="alert_message error">
-                    <p>some error ocurred</p>
+                    <p>{initialCategory === null ? 'some error occured or category not exists try again later ' : 'some error ocurred'}</p>
                 </div>
 
-                {location.pathname === '/updateCategory' ?
+                {location.pathname !== '/updateCategory' ?
                     <form>
                         <input type="text" name="title" onChange={(e) => OnChange(e)} placeholder="Title" />
                         <textarea rows="4" name="desc" onChange={(e) => OnChange(e)} placeholder="Description"></textarea>
@@ -54,7 +65,7 @@ const AddCategory = () => {
                     <form>
                         <input type="text" name="title" value={categoryData.title} onChange={(e) => OnChange(e)} placeholder="Title" />
                         <textarea rows="4" name="desc" value={categoryData.desc} onChange={(e) => OnChange(e)} placeholder="Description"></textarea>
-                        <button onClick={(e) => editCategory(categoryData)} className="btn">update Category</button>
+                        <button onClick={(e) => updateCategoryHandle(e,categoryData)} className="btn">update Category</button>
                     </form>
                 }
 
