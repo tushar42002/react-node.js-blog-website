@@ -21,7 +21,7 @@ export const getPostWithId = (req, res)=>{
     console.log(id);
 
     if(id){
-        var sql = `SELECT * FROM posts WHERE id = '${id}'`;
+        var sql = `SELECT posts.id, posts.post_title, posts.post_contant, posts.post_image, posts.date, categories.title, users.email, users.avatar FROM posts JOIN categories ON posts.category = categories.id JOIN users on posts.user_id = users.id WHERE posts.id = '${id}'`;
     }else if(category){
         var sql = `SELECT * FROM posts WHERE category = '${category}'  ORDER BY date DESC`;
     }
