@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 18, 2023 at 01:50 PM
+-- Generation Time: Aug 20, 2023 at 12:59 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -40,7 +40,7 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `title`, `descripton`, `user_email`, `date`) VALUES
-(1, 'wild', 'wild', 'wild', '2023-07-23 23:20:29');
+(1, 'wild life', 'wild life', 'wild', '2023-07-23 23:20:29');
 
 -- --------------------------------------------------------
 
@@ -63,7 +63,8 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`id`, `post_title`, `post_contant`, `post_image`, `category`, `user_id`, `date`) VALUES
-(3, 'The standard Lorem Ipsum passage, used since the 1500s', 'Lodvcbknmsdvchbnm.', '1691758383666-7blog1.jpg', 'wild', 0, '2023-08-11 18:23:03');
+(3, 'The standard Lorem Ipsum passage, used since the 1500s', 'Lodvcbknmsdvchbnm.', '1691758383666-7blog1.jpg', '1', 0, '2023-08-11 18:23:03'),
+(7, 'test 1', 'lorem the yadav', '1691758383666-7blog1.jpg', '1', 0, '2023-08-19 21:14:10');
 
 -- --------------------------------------------------------
 
@@ -87,6 +88,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `avatar`, `is_admin`, `date`) VALUES
+(0, 'unknown', 'unknown', 'unknown', '12345678', '1690130315917-822766.jpg', 0, '2023-08-19 22:17:04'),
 (1, 'Ram', 'Ram', 'test@gmail.com', '$2a$10$nlqE2KuED/biMgpP4DN1murJt7MRlx6Px8KvITlzhqBLW2vhOyeWW', '1690130315917-822766.jpg', 0, '2023-07-23 22:08:36');
 
 --
@@ -125,13 +127,13 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
