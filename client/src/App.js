@@ -25,35 +25,35 @@ import EditBlog from './component/blog/EditBlog';
 function App() {
   return (
     <>
-    <Navbar/>
       <Router>
         <DataProvider>
-        <div>
-          <Routes>
-           <Route path='/' element={<Home />}/>
-           
-           <Route path='/login' element={<Login />}/>
-           <Route path='/signup' element={<Signup />}/>
+          <Navbar />
+          <div>
+            <Routes>
+              <Route path='/' element={<Home />} />
 
-           <Route path='/blog' element={<Blogs />}/>
-           <Route path='/singleblog/:id' element={<SingleBlog />}/>
+              <Route path='/login' element={<Login />} />
+              <Route path='/signup' element={<Signup />} />
 
-           <Route path='/about' element={<About />}/>
-           <Route path='/service' element={<Service />}/>
-           <Route path='/contact' element={<Contact />}/>
-           <Route path='/dashboard' element={<Dashboard />}/>
+              <Route path='/blog' element={<Blogs />} />
+              <Route path='/singleblog/:id' element={<SingleBlog />} />
 
-           <Route path='/addBlog' element={<AddBlog />}/>
-           <Route path='/updatepost/:id' element={<EditBlog />}/>
+              <Route path='/about' element={<About />} />
+              <Route path='/service' element={<Service />} />
+              <Route path='/contact' element={<Contact />} />
+              <Route path='/dashboard' element={<Dashboard />} />
 
-           <Route path='/addCategory' element={<AddCategory />}/>
-           <Route path='/updateCategory' element={<AddCategory />}/>
-          </Routes>
-        </div>
-    </DataProvider>
+              <Route path='/addBlog' element={<AddBlog />} />
+              <Route path='/updatepost/:id' element={<EditBlog />} />
+
+              <Route path='/addCategory' element={<AddCategory />} />
+              <Route path='/updateCategory' element={<AddCategory />} />
+            </Routes>
+          </div>
+          <Footer />
+        </DataProvider>
       </Router>
-      <Footer/>
-      </>
+    </>
   );
 }
 

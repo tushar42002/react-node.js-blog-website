@@ -1,35 +1,53 @@
-import React from 'react'
+import React, { useContext, useState, useEffect } from 'react'
+import { DataContext } from '../context/DataProvider';
+import { Link } from 'react-router-dom';
+
+
 
 const Navbar = () => {
+
+   const context  = useContext(DataContext);
+
+   const {isLogin} = context
+
+   const [userLogin, setUserLogin] = useState(false);
 
   const logOut = () => {
     sessionStorage.clear();
   }
 
+  useEffect(() => {
+    
+    setUserLogin(JSON.parse(sessionStorage.getItem('login')))
+   
+
+  }, [])
+  
+
   return (
 
     <nav>
       <div className="container nav_container">
-        <a href="/" className="nav_logo">APNA BLOG</a>
+        <Link to="/" className="nav_logo">APNA BLOG</Link>
         <ul className="nav_items">
-          <li><a href="/">Home</a></li>
-          <li><a href="/blog">Blog</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="/service">Services</a></li>
-          <li><a href="/contact">Contact</a></li>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/blog">Blog</Link></li>
+          <li><Link to="/about">About</Link></li>
+          <li><Link to="/service">Services</Link></li>
+          <li><Link to="/contact">Contact</Link></li>
 
           {
-            // sessionStorage.getItem(userLogin) == true ?
-            <li className="nav_profile">
-              <div className="avatar">
-                <img src="'. ROOT_URL .'images/'. $user_image .'" />
-              </div>
-              <ul>
-                <li><a href="/dashboard">Dashboard</a></li>
-                <li><a href="" onClick={logOut}>Log out</a></li>
-              </ul>
-            </li>
-            // : <li><a href="/signin.php">Signin</a></li>
+            userLogin === true ?
+              <li className="nav_profile">
+                <div className="avatar">
+                  <img src="'. ROOT_URL .'images/'. $user_image .'" />
+                </div>
+                <ul>
+                  <li><Link to="/dashboard">Dashboard</Link></li>
+                  <li><a href='/' onClick={logOut}>Log out</a></li>
+                </ul>
+              </li>
+              : <li><Link to="/login">login</Link></li>
           }
 
         </ul>

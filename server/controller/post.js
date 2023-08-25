@@ -3,7 +3,7 @@ import db from "../database/db.js";
 export const getPost = (req, res)=>{
     
     // let sql = `SELECT * FROM posts ORDER BY date DESC`;
-    let sql  = 'SELECT posts.id, posts.post_title, posts.post_contant, posts.post_image, posts.date, categories.title, users.email, users.avatar FROM posts JOIN categories ON posts.category = categories.id JOIN users on posts.user_id = users.id'; 
+    let sql  = 'SELECT posts.id, posts.post_title, posts.post_contant, posts.post_image, posts.category, posts.date, categories.title, users.email, users.avatar FROM posts JOIN categories ON posts.category = categories.id JOIN users on posts.user_id = users.id'; 
     db.query(sql, function(err, result){
         if(err){
             res.status(500).json({ "error": "some error occured please try later" });
@@ -21,7 +21,7 @@ export const getPostWithId = (req, res)=>{
     console.log(id);
 
     if(id){
-        var sql = `SELECT posts.id, posts.post_title, posts.post_contant, posts.post_image, posts.date, categories.title, users.email, users.avatar FROM posts JOIN categories ON posts.category = categories.id JOIN users on posts.user_id = users.id WHERE posts.id = '${id}'`;
+        var sql = `SELECT posts.id, posts.post_title, posts.post_contant, posts.category, posts.post_image, posts.date, categories.title, users.email, users.avatar FROM posts JOIN categories ON posts.category = categories.id JOIN users on posts.user_id = users.id WHERE posts.id = '${id}'`;
     }else if(category){
         var sql = `SELECT * FROM posts WHERE category = '${category}'  ORDER BY date DESC`;
     }
@@ -57,15 +57,27 @@ export const addPost = (req, res) => {
 export const updatePost = (req, res) =>{
 
       const {id, heading, category, contant} = req.body;
+      
+      let image;
+
+      if(req.body.image === 'null'){
+         image  = req.body.oldImagePath;
+      } else{
+         image = req.file.filename;
+      }
 
     console.log(req.body);
     console.log(req.file);
+    console.log(image);
 
-    let sql = `UPDATE posts SET post_title ='${heading}', post_contant = "${contant}", post_image = '${req.file.filename}', category = '${category}' where id = ${id}`;
+    let sql = `UPDATE posts SET post_title ='${heading}', post_contant = "${contant}", post_image = '${image}', category = '${category}' where id = ${id}`;
 
     db.query(sql, function(err, result){
         if(err){
+            console.log(err);
             res.status(500).json({ "error": "some error occured please try later" });
+        }else{
+            res.status(200).json({ "success": "successfully updated" });
         }
     })
 }

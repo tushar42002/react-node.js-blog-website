@@ -1,5 +1,5 @@
 import { createContext, useState } from "react"
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const DataContext = createContext();
 
@@ -10,6 +10,7 @@ const DataProvider = ({ children }) => {
 
     const [blogs, setBlogs] = useState([]);
     const [blogs2, setBlogs2] = useState([]);
+    const [isLogin, setIsLogin] = useState(false);
 
     const [category, setCategory] = useState([]);
 
@@ -66,8 +67,14 @@ const DataProvider = ({ children }) => {
         })
         const json = await response.json();
         sessionStorage.setItem('user', JSON.stringify(json));
+        
+        setIsLogin(true);
+
         sessionStorage.setItem('login', true);
+
         navigate('/', { replace: true });
+
+
     }
 
     const signup = async (data) => {
@@ -132,9 +139,9 @@ const DataProvider = ({ children }) => {
 
         console.log(JSON.parse(sessionStorage.getItem('user')));
 
-        let userEmail = JSON.parse(sessionStorage.getItem('user')).email;
+        // let userEmail = JSON.parse(sessionStorage.getItem('user')).email;
 
-        data.email = userEmail;
+        // data.email = userEmail;
 
         // console.log(data);
 
@@ -193,13 +200,16 @@ const DataProvider = ({ children }) => {
 
     const editBlog = async (data) => {
 
+        console.log(data, 'editBlog');
+
         const file = new FormData();
 
+        file.append('id', data.id);
         file.append('heading', data.heading);
         file.append('category', data.category);
         file.append('contant', data.contant);
         file.append('image', data.image);
-        file.append('user_id', '0');
+        file.append('oldImagePath', data.oldImagePath);
         console.log(file);
 
         const response = await fetch(`${url}/updatepost`, {
@@ -235,7 +245,7 @@ const DataProvider = ({ children }) => {
 
     return (
         <DataContext.Provider value={{
-            blogs,blogs2, category, url, login, signup, getBlogs,getBlogs2, addBlog, deleteBlog, editBlog, getCategory, addCategory, deleteCategory, editCategory
+          isLogin, blogs,blogs2, category, url, login, signup, getBlogs,getBlogs2, addBlog, deleteBlog, editBlog, getCategory, addCategory, deleteCategory, editCategory
         }}>
             {children}
         </DataContext.Provider>

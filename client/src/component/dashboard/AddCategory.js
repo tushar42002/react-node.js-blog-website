@@ -30,6 +30,7 @@ const AddCategory = () => {
 
     const categoryHandle = (e) => {
         e.preventDefault();
+        console.log(categoryData);
         addCategory(categoryData);
     }
 
@@ -59,7 +60,7 @@ const AddCategory = () => {
                     <form>
                         <input type="text" name="title" onChange={(e) => OnChange(e)} placeholder="Title" />
                         <textarea rows="4" name="desc" onChange={(e) => OnChange(e)} placeholder="Description"></textarea>
-                        <button type="submit" name="submit" onClick={categoryHandle} className="btn">Add Category</button>
+                        <button type="submit" name="submit" onClick={(e)=>categoryHandle(e)} className="btn">Add Category</button>
                     </form>
                     :
                     <form>

@@ -44,7 +44,7 @@ const ManageBlogs = () => {
                                 return(
                                 <tr key={item.id}>
                                     <td>{item.post_title}</td>
-                                    <td>{item.category}</td>
+                                    <td>{item.title}</td>
                                     <td><span onClick={() =>  navigate(`/updatepost/${item.id}`)} className="btn sm">Edit</span></td>
                                     <td><span onClick={() => deleteBlog(item.id)} className="btn sm danger">Delete</span></td>
                                 </tr> 
