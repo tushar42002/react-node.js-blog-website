@@ -58,8 +58,6 @@ const EditBlog = () => {
 
     }
 
-    console.log(blogData);
-
 
     return (
         <section className="form_section">

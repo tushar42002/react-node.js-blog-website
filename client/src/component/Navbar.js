@@ -8,9 +8,11 @@ const Navbar = () => {
 
    const context  = useContext(DataContext);
 
-   const {isLogin} = context
+   const {isLogin, url} = context
 
-   const [userLogin, setUserLogin] = useState(false);
+   const [userLogin, setUserLogin] = useState();
+   const [userData, setUserData] = useState({});
+
 
   const logOut = () => {
     sessionStorage.clear();
@@ -18,10 +20,13 @@ const Navbar = () => {
 
   useEffect(() => {
     
-    setUserLogin(JSON.parse(sessionStorage.getItem('login')))
+    setUserLogin(JSON.parse(sessionStorage.getItem('login')));
+
+    setUserData(JSON.parse(sessionStorage.getItem('user')));
+    
    
 
-  }, [])
+  }, [isLogin])
   
 
   return (
@@ -40,7 +45,7 @@ const Navbar = () => {
             userLogin === true ?
               <li className="nav_profile">
                 <div className="avatar">
-                  <img src="'. ROOT_URL .'images/'. $user_image .'" />
+                  <img src={`${url}/uploads/${userData.avatar}`} />
                 </div>
                 <ul>
                   <li><Link to="/dashboard">Dashboard</Link></li>

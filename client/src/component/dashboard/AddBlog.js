@@ -14,7 +14,6 @@ const AddBlog = () => {
 
     let initialBlogData = {};
 
-    console.log(location.pathname.slice(0, 11));
 
     useEffect(() => {
 
@@ -40,8 +39,8 @@ const AddBlog = () => {
 
         e.preventDefault();
 
-        console.log(blogData);
-        console.log(Object.keys(blogData).length);
+        // console.log(blogData);
+        // console.log(Object.keys(blogData).length);
 
         addBlog(blogData);
 

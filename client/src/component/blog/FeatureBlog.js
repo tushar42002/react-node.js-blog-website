@@ -18,7 +18,6 @@ const FeatureBlog = () => {
 
     
         const randomNumber =  Math.floor(Math.random() * blogs.length);
-        console.log(randomNumber);
 
 
     return (
@@ -33,7 +32,7 @@ const FeatureBlog = () => {
                             </div>
                             <div className="post_info">
                                 <a href="category-posts.php" className="category_button">{blogs[randomNumber].title}</a>
-                                <h2 className="post_title"><Link href={`/singleblog/${blogs[randomNumber].id}`}>{blogs[randomNumber].post_title}</Link>
+                                <h2 className="post_title"><Link to={`/singleblog/${blogs[randomNumber].id}`}>{blogs[randomNumber].post_title}</Link>
                                 </h2>
                                 <p className="post_body">{blogs[randomNumber].post_contant.slice(0, 400)}</p>
                                 <div className="post_author">

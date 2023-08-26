@@ -8,11 +8,8 @@ const Blog = () => {
   const location = useLocation();
 
   const context = useContext(DataContext);
-  const { blogs, getBlogs, url } = context;
+  const { blogs, url } = context;
 
-  useEffect(() => {
-    getBlogs();
-  }, [])
 
   const imageUrl = url;
 

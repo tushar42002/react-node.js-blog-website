@@ -31,13 +31,13 @@ const DataProvider = ({ children }) => {
 
     const getBlogs2 = async (data) => {
 
-        const response = await fetch(`${url}/getpost/${data}`, {
+        const response = await fetch(`${url}/getpost2/${data}`, {
             method: 'GET',
             headers: new Headers({ 'content-Type': 'application/json' })
         })
         const json = await response.json();
 
-        console.log(json, 'dataprovider');
+        // console.log(json, 'dataprovider');
 
         setBlogs2(json)
 
@@ -68,9 +68,9 @@ const DataProvider = ({ children }) => {
         const json = await response.json();
         sessionStorage.setItem('user', JSON.stringify(json));
         
+        sessionStorage.setItem('login', true);
         setIsLogin(true);
 
-        sessionStorage.setItem('login', true);
 
         navigate('/', { replace: true });
 
@@ -118,7 +118,7 @@ const DataProvider = ({ children }) => {
         file.append('contant', data.contant)
         file.append('image', data.image)
         file.append('user_id', '0')
-        console.log(file);
+        // console.log(file);
 
         const response = await fetch(`${url}/addpost`, {
             method: 'POST',
@@ -137,11 +137,11 @@ const DataProvider = ({ children }) => {
 
     const addCategory = async (data) => {
 
-        console.log(JSON.parse(sessionStorage.getItem('user')));
+        // console.log(JSON.parse(sessionStorage.getItem('user')));
 
-        // let userEmail = JSON.parse(sessionStorage.getItem('user')).email;
+        let userId = JSON.parse(sessionStorage.getItem('user')).id;
 
-        // data.email = userEmail;
+        data.user = userId;
 
         // console.log(data);
 
@@ -200,7 +200,7 @@ const DataProvider = ({ children }) => {
 
     const editBlog = async (data) => {
 
-        console.log(data, 'editBlog');
+        // console.log(data, 'editBlog');
 
         const file = new FormData();
 
@@ -210,7 +210,7 @@ const DataProvider = ({ children }) => {
         file.append('contant', data.contant);
         file.append('image', data.image);
         file.append('oldImagePath', data.oldImagePath);
-        console.log(file);
+        // console.log(file);
 
         const response = await fetch(`${url}/updatepost`, {
             method: 'POST',
@@ -245,7 +245,7 @@ const DataProvider = ({ children }) => {
 
     return (
         <DataContext.Provider value={{
-          isLogin, blogs,blogs2, category, url, login, signup, getBlogs,getBlogs2, addBlog, deleteBlog, editBlog, getCategory, addCategory, deleteCategory, editCategory
+          isLogin, blogs,blogs2, category, url, navigate, login, signup, getBlogs,getBlogs2, addBlog, deleteBlog, editBlog, getCategory, addCategory, deleteCategory, editCategory
         }}>
             {children}
         </DataContext.Provider>

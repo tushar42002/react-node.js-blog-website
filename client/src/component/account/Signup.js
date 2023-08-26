@@ -22,14 +22,12 @@ const onImage = (e) => {
 
 }
 
-  console.log(signupData);
-
   const signupHandle = (e) => {
 
     e.preventDefault();
 
-    console.log(signupData);
-    console.log(Object.keys(signupData).length);
+    // console.log(signupData);
+    // console.log(Object.keys(signupData).length);
 
     if (signupData.password === signupData.cpassword || Object.keys(signupData).length === 6) {
       signup(signupData)
@@ -44,7 +42,6 @@ const onImage = (e) => {
         <div className="alert_message error">
           <p>some error</p>
         </div>
-
         <form action='' encType="multipart/form-data" method="POST">
           <input type="text" name="firstname"  placeholder="First Name" onChange={(e)=>OnChange(e)}/>
           <input type="text" name="lastname" placeholder="last Name" onChange={(e)=>OnChange(e)}/>

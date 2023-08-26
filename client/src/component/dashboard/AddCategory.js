@@ -30,7 +30,7 @@ const AddCategory = () => {
 
     const categoryHandle = (e) => {
         e.preventDefault();
-        console.log(categoryData);
+        // console.log(categoryData);
         addCategory(categoryData);
     }
 

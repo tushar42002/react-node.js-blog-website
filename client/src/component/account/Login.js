@@ -6,27 +6,24 @@ import { DataContext } from '../../context/DataProvider';
 const Login = () => {
 
 
-  const context  = useContext(DataContext);
+  const context = useContext(DataContext);
 
   const { login } = context;
 
-  const [loginData , setLoginData] = useState({});
+  const [loginData, setLoginData] = useState({});
 
   const OnChange = (e) => {
-    setLoginData({...loginData, [e.target.name]: e.target.value});
+    setLoginData({ ...loginData, [e.target.name]: e.target.value });
   }
 
   const loginHandle = (e) => {
     e.preventDefault();
 
-    console.log(loginData);
-    // console.log(Object.keys(signupData).length);
+    login(loginData)
 
-      login(loginData)
-    
   }
 
-  console.log(loginData);
+
 
   return (
     <section className="form_section">
@@ -39,9 +36,9 @@ const Login = () => {
           <p>some error</p>
         </div>
         <form method="POST">
-          <input type="text" name="email" placeholder="Email" onChange={(e)=>OnChange(e)} />
-          <input type="password" name="password" placeholder="password" onChange={(e)=>OnChange(e)} />
-          <input type="submit" className="btn" onClick={loginHandle} value="sign in" />
+          <input type="text" name="email" placeholder="Email" onChange={(e) => OnChange(e)} />
+          <input type="password" name="password" placeholder="password" onChange={(e) => OnChange(e)} />
+          <input type="submit" className="btn" onClick={(e) => loginHandle(e)} value="sign in" />
           <small>Create New account? <Link to="/signup">Sign up</Link></small>
         </form>
       </div>
