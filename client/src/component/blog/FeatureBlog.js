@@ -37,7 +37,7 @@ const FeatureBlog = () => {
                                 <p className="post_body">{blogs[randomNumber].post_contant.slice(0, 400)}</p>
                                 <div className="post_author">
                                     <div className="post_author-avatar">
-                                        <img src={`${imageUrl}/uploads/${blogs[randomNumber].post_image}`} alt='' />
+                                        <img src={`${imageUrl}/uploads/${blogs[randomNumber].avatar}`} alt='' />
                                     </div>
                                     <div className="post_author-info">
 

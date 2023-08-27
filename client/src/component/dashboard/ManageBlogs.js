@@ -9,10 +9,31 @@ const ManageBlogs = () => {
 
     const context = useContext(DataContext);
 
-    const { deleteBlog, editBlog, blogs, getBlogs } = context;
+    const { deleteBlog, editBlog, blogs2, getBlogs2 } = context;
+
+    const user = localStorage.getItem('user')? JSON.parse(localStorage.getItem('user')) : false;
+
+    let blogWithUserId;
+
+
+
+    
 
     useEffect(() => {
-        getBlogs();
+
+        if (!user) {
+            navigate('/login', { replace: true });
+        }else{
+             blogWithUserId = user !== null ? `?user=${user.id}` : null;
+        }
+
+        if (user.is_admin !== 1 ) {
+            getBlogs2(blogWithUserId);
+            
+        }else if(user.is_admin === 1){
+            getBlogs2(`?admin=yes`);
+        }
+
     }, [])
 
     // const updateBlog = (id) => {
@@ -36,10 +57,10 @@ const ManageBlogs = () => {
 
                     {
 
-                        blogs.length === 0 ?
+                        blogs2.length === 0 ?
                             <tr><td style={{color: 'green', fontWeight: '600'}}>add blogs to show</td></tr> :
 
-                            blogs.map((item) => {
+                            blogs2.map((item) => {
 
                                 return(
                                 <tr key={item.id}>

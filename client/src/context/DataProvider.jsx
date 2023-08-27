@@ -10,7 +10,7 @@ const DataProvider = ({ children }) => {
 
     const [blogs, setBlogs] = useState([]);
     const [blogs2, setBlogs2] = useState([]);
-    const [isLogin, setIsLogin] = useState(false);
+    const [isLogin, setIsLogin] = useState(null);
 
     const [category, setCategory] = useState([]);
 
@@ -66,9 +66,10 @@ const DataProvider = ({ children }) => {
             body: JSON.stringify(data)
         })
         const json = await response.json();
-        sessionStorage.setItem('user', JSON.stringify(json));
+        localStorage.setItem('user', JSON.stringify(json));
         
-        sessionStorage.setItem('login', true);
+        localStorage.setItem('login', true);
+
         setIsLogin(true);
 
 
@@ -111,13 +112,13 @@ const DataProvider = ({ children }) => {
 
         const file = new FormData();
 
-        let user = JSON.parse(sessionStorage.getItem('user'));
+        let user = JSON.parse(localStorage.getItem('user'));
 
-        file.append('heading', data.heading)
-        file.append('category', data.category)
-        file.append('contant', data.contant)
-        file.append('image', data.image)
-        file.append('user_id', '0')
+        file.append('heading', data.heading);
+        file.append('category', data.category);
+        file.append('contant', data.contant);
+        file.append('image', data.image);
+        file.append('user_id', user.id);
         // console.log(file);
 
         const response = await fetch(`${url}/addpost`, {
@@ -137,9 +138,9 @@ const DataProvider = ({ children }) => {
 
     const addCategory = async (data) => {
 
-        // console.log(JSON.parse(sessionStorage.getItem('user')));
+        // console.log(JSON.parse(localStorage.getItem('user')));
 
-        let userId = JSON.parse(sessionStorage.getItem('user')).id;
+        let userId = JSON.parse(localStorage.getItem('user')).id;
 
         data.user = userId;
 

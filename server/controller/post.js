@@ -17,19 +17,28 @@ export const getPost = (req, res)=>{
 export const getPostWithId = (req, res)=>{
 
     const category = req.query.category;
+    const userID = req.query.user;
+    const isAdmin = req.query.admin;
     const id = req.params.id;
-    console.log(id);
+    // console.log(id );
+    // console.log(userID ,'user');
+    // console.log(category);
+    // console.log(isAdmin);
 
     if(id){
         var sql = `SELECT posts.id, posts.post_title, posts.post_contant, posts.category, posts.post_image, posts.date, categories.title, users.email, users.avatar FROM posts JOIN categories ON posts.category = categories.id JOIN users on posts.user_id = users.id WHERE posts.id = '${id}'`;
     }else if(category){
         var sql = `SELECT * FROM posts WHERE category = '${category}'  ORDER BY date DESC`;
+    }else if(userID){
+        var sql = `SELECT posts.id, posts.post_title, posts.post_contant, posts.category, posts.post_image, posts.date, categories.title, users.email, users.avatar FROM posts JOIN categories ON posts.category = categories.id JOIN users on posts.user_id = users.id WHERE posts.user_id = '${userID}'`;
+    }else if(isAdmin === 'yes'){
+        var sql = `SELECT posts.id, posts.post_title, posts.post_contant, posts.category, posts.post_image, posts.date, categories.title FROM posts JOIN categories ON posts.category = categories.id `;
     }
     db.query(sql, function(err, result){
         if(err){
             res.status(500).json({ "error": "some error occured please try later" });
         }else{
-            console.log(result);
+            // console.log(result);
             res.json(result);
         }
     })

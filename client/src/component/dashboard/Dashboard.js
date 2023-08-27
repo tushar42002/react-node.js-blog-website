@@ -15,15 +15,27 @@ const Dashboard = () => {
 
     const [userLogin, setUserLogin] = useState();
 
+   
+    let user  = JSON.parse(localStorage.getItem('user'));
+
+    // setIsadmin(user.is_admin)
+    // setIsadmin(user === null ? null :user.is_admin)
+
     useEffect(() => {
         
-        let user  = JSON.parse(sessionStorage.getItem('user'));
+        if (!user) {
+            navigate('/login', { replace: true });
+        }else{
+            setIsadmin(user === null ? null :user.is_admin)
+        }
 
-        setIsadmin(user === null ? null :user.is_admin)
+        
 
-        setUserLogin(!JSON.parse(sessionStorage.getItem('login')) ? false:JSON.parse(sessionStorage.getItem('login')));
+        setUserLogin(!JSON.parse(localStorage.getItem('login')) ? false:JSON.parse(localStorage.getItem('login')));
 
-    }, [isLogin])
+    }, [])
+
+
 
 
     const [manage, setManage] = useState('blog');
@@ -53,11 +65,11 @@ const Dashboard = () => {
                                         <h5>Add User</h5>
                                     </Link>
                                 </li>
-                                <li>
+                                {/* <li>
                                     <a onClick={() => setManage('user')} className={`${manage === 'user' ? 'active' : ''}`}><i className="fas fa-user-group"></i>
                                         <h5>manage users</h5>
                                     </a>
-                                </li>
+                                </li> */}
                                 <li>
                                     <Link to="/addCategory"><i className="fas fa-edit"></i>
                                         <h5>Add Category</h5>

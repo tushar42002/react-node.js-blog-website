@@ -23,6 +23,7 @@ router.post('/addpost', upload.single("image"), addPost);
 router.get('/deletepost/:id', deletePost);
 router.post('/updatepost', upload.single("image"), updatePost);
 router.get('/getpost', getPost);
+router.get('/getpost2', getPostWithId);
 router.get('/getpost2/:id', getPostWithId);
 
 // gategory routes

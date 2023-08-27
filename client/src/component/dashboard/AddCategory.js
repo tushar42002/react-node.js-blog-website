@@ -10,7 +10,7 @@ const AddCategory = () => {
 
     const location = useLocation();
 
-    let initialCategory = JSON.parse(sessionStorage.getItem('category'));
+    let initialCategory = JSON.parse(localStorage.getItem('category'));
 
 
     const context = useContext(DataContext);
@@ -40,7 +40,7 @@ const AddCategory = () => {
 
         editCategory(data);
 
-        sessionStorage.removeItem('category');
+        localStorage.removeItem('category');
 
     }
 

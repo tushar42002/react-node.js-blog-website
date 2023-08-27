@@ -8,26 +8,46 @@ const Navbar = () => {
 
    const context  = useContext(DataContext);
 
+   const loggedIn = JSON.parse(window.localStorage.getItem('login'))
+   const user = JSON.parse(window.localStorage.getItem('user'))
+
    const {isLogin, url} = context
 
-   const [userLogin, setUserLogin] = useState();
+   const [userLogin, setUserLogin] = useState(isLogin);
+   const [isLogin2, setIsLogin2] = useState();
    const [userData, setUserData] = useState({});
 
 
   const logOut = () => {
-    sessionStorage.clear();
+    localStorage.clear();
   }
 
-  useEffect(() => {
-    
-    setUserLogin(JSON.parse(sessionStorage.getItem('login')));
+  // console.log(isLogin2, 'asdf');
+  // console.log(isLogin, 'qwe');
 
-    setUserData(JSON.parse(sessionStorage.getItem('user')));
-    
-   
 
-  }, [isLogin])
   
+
+
+  // useEffect(() => {
+
+  //   setUserData(JSON.parse(localStorage.getItem('user')));
+
+  //   setUserLogin(loggedIn)
+
+  //   console.log('1');
+
+  // }, [])
+
+  // useEffect(() => {
+
+  //   console.log('2');
+  //   setUserLogin(loggedIn)
+
+  //   setUserData(JSON.parse(localStorage.getItem('user')));
+
+
+  // }, [userLogin])
 
   return (
 
@@ -42,10 +62,11 @@ const Navbar = () => {
           <li><Link to="/contact">Contact</Link></li>
 
           {
-            userLogin === true ?
+            
+            loggedIn === true ?
               <li className="nav_profile">
                 <div className="avatar">
-                  <img src={`${url}/uploads/${userData.avatar}`} />
+                  <img src={`${url}/uploads/${user.avatar}`} />
                 </div>
                 <ul>
                   <li><Link to="/dashboard">Dashboard</Link></li>

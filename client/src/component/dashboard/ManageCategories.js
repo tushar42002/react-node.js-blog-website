@@ -16,8 +16,8 @@ const ManageCategories = () => {
 
     const updateCategory = (data)=>{
 
-        sessionStorage.removeItem('category');   
-        sessionStorage.setItem('category', JSON.stringify(data));
+        localStorage.removeItem('category');   
+        localStorage.setItem('category', JSON.stringify(data));
 
         navigate('/updateCategory'); 
     }

@@ -58,7 +58,7 @@ const AddBlog = () => {
                 <form action="" encType="multipart/form-data" method="POST">
                     <input type="text" onChange={(e) => OnChange(e)} name="heading" placeholder="Title" />
                     <select name="category" onChange={(e) => OnChange(e)}>
-                        <option value="uncategorize">select category</option>
+                        <option value="0">select category</option>
 
                         {
                             category.map((item) => {
