@@ -3,5 +3,4 @@
 
 # database name = blog
 
-
-
+npm run start for client and server 
